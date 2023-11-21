@@ -3,9 +3,8 @@ import { AppContext } from '../context/AppContext';
 
 export default () => {
     const { dispatch, currency } = useContext(AppContext);
-    const handleClick = (event) => {
-        console.log(event.target['value']);
-        dispatch({type: 'CHG_CURRENCY', payload: event.target.value});
+    const handleClick = (key) => {
+        dispatch({type: 'CHG_CURRENCY', payload: key});
     }
     const currency_list = {"$": "Dollar", "£": "Pound", "€": "Euro", "₹": "Ruppee"}
 
@@ -16,7 +15,7 @@ export default () => {
                     Currency ({currency} {currency_list[currency]})
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    {Object.keys(currency_list).map(key => (<a className="dropdown-item" href="#" onClick={handleClick} value={key} key={key}>{key} {currency_list[key]}</a>))}
+                    {Object.keys(currency_list).map(key => (<a className="dropdown-item" href="#" onClick={() => handleClick(key)} key={key}>{key} {currency_list[key]}</a>))}
                 </div>
                 </div>
         </div>
